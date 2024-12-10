@@ -9,6 +9,14 @@ import java.util.List;
 public class CSVHandler {
     private static final String FILE_PATH = "data/mobiles.csv";
 
+    // Ensure the directory exists before writing the file
+    private static void ensureDirectoryExists() {
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdirs(); // Create the directory if it does not exist
+        }
+    }
+
     public static List<Mobile> readMobiles() {
         List<Mobile> mobiles = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
@@ -38,6 +46,8 @@ public class CSVHandler {
     }
 
     public static void writeMobile(Mobile mobile) {
+        ensureDirectoryExists(); // Ensure the directory exists before writing the file
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             bw.write(mobile.toCSV());
             bw.newLine();
@@ -47,6 +57,8 @@ public class CSVHandler {
     }
 
     public static void overwriteMobiles(List<Mobile> mobiles) {
+        ensureDirectoryExists(); // Ensure the directory exists before writing the file
+
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
             for (Mobile mobile : mobiles) {
                 bw.write(mobile.toCSV());
