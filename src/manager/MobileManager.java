@@ -58,7 +58,6 @@ public class MobileManager {
         } else {
             System.out.println("Danh sách điện thoại:");
             for (Mobile mobile : mobiles) {
-                // Sử dụng toString() để hiển thị chi tiết
                 System.out.println(mobile.toString());
             }
         }
@@ -110,6 +109,27 @@ public class MobileManager {
             } catch (NumberFormatException e) {
                 System.out.println("Vui lòng nhập một số nguyên hợp lệ cho ID.");
             }
+        }
+    }
+
+    public void searchMobile() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập từ khóa để tìm kiếm (ID hoặc Tên): ");
+        String keyword = scanner.nextLine().toLowerCase(); // Chuyển từ khóa về chữ thường
+
+        boolean found = false;
+        System.out.println("Kết quả tìm kiếm:");
+
+        for (Mobile mobile : mobiles) {
+            // Tìm kiếm gần đúng theo ID hoặc Tên
+            if (String.valueOf(mobile.getId()).contains(keyword) || mobile.getName().toLowerCase().contains(keyword)) {
+                System.out.println(mobile.toString());
+                found = true;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Không tìm thấy điện thoại phù hợp với từ khóa: " + keyword);
         }
     }
 }

@@ -14,7 +14,8 @@ public class Main {
             System.out.println("1. Thêm điện thoại mới");
             System.out.println("2. Xóa điện thoại");
             System.out.println("3. Hiển thị danh sách điện thoại");
-            System.out.println("4. Thoát");
+            System.out.println("4. Tìm kiếm điện thoại");
+            System.out.println("5. Thoát");
             System.out.print("Chọn chức năng: ");
 
             int choice = Integer.parseInt(scanner.nextLine());
@@ -30,6 +31,9 @@ public class Main {
                     manager.displayMobiles();
                     break;
                 case 4:
+                    manager.searchMobile();
+                    break;
+                case 5:
                     System.out.println("Thoát chương trình.");
                     return;
                 default:
