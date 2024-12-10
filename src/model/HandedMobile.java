@@ -1,6 +1,6 @@
 package model;
 
-public class HandedMobile extends model.Mobile {
+public class HandedMobile extends Mobile {
     private String importedCountry;
     private String status;
 
@@ -10,14 +10,28 @@ public class HandedMobile extends model.Mobile {
         this.status = status;
     }
 
-    @Override
-    public String toCSV() {
-        return getId() + "," + getName() + "," + getPrice() + "," + getQuantity() + "," + getManufacturer() + "," + importedCountry + "," + status;
+    public String getImportedCountry() {
+        return importedCountry;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     @Override
-    public void display() {
-        System.out.println("ID: " + getId() + ", Name: " + getName() + ", Price: " + getPrice() + ", Quantity: " + getQuantity() +
-                ", Manufacturer: " + getManufacturer() + ", Imported Country: " + importedCountry + ", Status: " + status);
+    public String toCSV() {
+        return getId() + "," + getName() + "," + getPrice() + "," + getQuantity() + "," +
+                getManufacturer() + "," + importedCountry + "," + status;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + getId() +
+                ", Name: " + getName() +
+                ", Price: " + getPrice() +
+                ", Quantity: " + getQuantity() +
+                ", Manufacturer: " + getManufacturer() +
+                ", Imported Country: " + importedCountry +
+                ", Status: " + status;
     }
 }

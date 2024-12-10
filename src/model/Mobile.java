@@ -35,7 +35,6 @@ public abstract class Mobile {
         return manufacturer;
     }
 
+    // Abstract method toCSV to be implemented by subclasses
     public abstract String toCSV();
-
-    public abstract void display();
 }

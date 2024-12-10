@@ -1,8 +1,6 @@
 package util;
 
 import model.Mobile;
-import model.AuthenticMobile;
-import model.HandedMobile;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -26,11 +24,11 @@ public class CSVHandler {
                 if (parts.length == 7) { // Authentic Mobile
                     int warrantyTime = Integer.parseInt(parts[5]);
                     String warrantyRange = parts[6];
-                    mobiles.add(new AuthenticMobile(id, name, price, quantity, manufacturer, warrantyTime, warrantyRange));
+                    mobiles.add(new model.AuthenticMobile(id, name, price, quantity, manufacturer, warrantyTime, warrantyRange));
                 } else if (parts.length == 7) { // Handed Mobile
                     String importedCountry = parts[5];
                     String status = parts[6];
-                    mobiles.add(new HandedMobile(id, name, price, quantity, manufacturer, importedCountry, status));
+                    mobiles.add(new model.HandedMobile(id, name, price, quantity, manufacturer, importedCountry, status));
                 }
             }
         } catch (IOException e) {
