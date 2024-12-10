@@ -27,21 +27,21 @@ public class Controller {
                     manager.searchMobile();
                     break;
                 case 5:
-                    System.out.println("Exiting the program.");
+                    System.out.println("Thoát chương trình.");
                     return;
                 default:
-                    System.out.println("Invalid option");
+                    System.out.println("Lựa chọn không hợp lệ.");
             }
         }
     }
 
     private void displayMenu() {
-        System.out.println("----- MOBILE MANAGEMENT -----");
-        System.out.println("1. Add new mobile");
-        System.out.println("2. Delete mobile");
-        System.out.println("3. Display list of mobiles");
-        System.out.println("4. Search mobile");
-        System.out.println("5. Exit");
-        System.out.print("Choose an option: ");
+        System.out.println("----- CHƯƠNG TRÌNH QUẢN LÝ ĐIỆN THOẠI -----");
+        System.out.println("1. Thêm mới");
+        System.out.println("2. Xóa ");
+        System.out.println("3. Xem danh sách");
+        System.out.println("4. Tìm kiếm");
+        System.out.println("5. Thoát");
+        System.out.print("Chọn chức năng: ");
     }
 }

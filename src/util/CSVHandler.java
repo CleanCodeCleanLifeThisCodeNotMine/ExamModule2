@@ -40,7 +40,7 @@ public class CSVHandler {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
+            System.out.println("Khong tim thay file: " + e.getMessage());
         }
         return mobiles;
     }
@@ -52,7 +52,7 @@ public class CSVHandler {
             bw.write(mobile.toCSV());
             bw.newLine();
         } catch (IOException e) {
-            System.out.println("Error writing file: " + e.getMessage());
+            System.out.println("Khong tim thay file: " + e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class CSVHandler {
                 bw.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error overwriting file: " + e.getMessage());
+            System.out.println("Khong tim thay file: " + e.getMessage());
         }
     }
 }
