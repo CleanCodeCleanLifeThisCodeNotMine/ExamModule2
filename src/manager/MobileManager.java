@@ -2,7 +2,7 @@ package manager;
 
 import model.*;
 import util.CSVHandler;
-import exception.NotFoundProductException;
+import exception.NotFoundException;
 
 import java.util.List;
 import java.util.Scanner;
@@ -32,7 +32,7 @@ public class MobileManager {
         if (choice == 1) { // Authentic Mobile
             System.out.println("Enter warranty time (days): ");
             int warrantyTime = Integer.parseInt(scanner.nextLine());
-            System.out.println("Enter warranty range (Toan Quoc/Quoc Te): ");
+            System.out.println("Enter warranty range (Nationwide/International): ");
             String warrantyRange = scanner.nextLine();
 
             Mobile mobile = new AuthenticMobile(id, name, price, quantity, manufacturer, warrantyTime, warrantyRange);
@@ -42,7 +42,7 @@ public class MobileManager {
         } else if (choice == 2) { // Handed Mobile
             System.out.println("Enter imported country: ");
             String importedCountry = scanner.nextLine();
-            System.out.println("Enter status (Da sua chua/Chua sua chua): ");
+            System.out.println("Enter status (Repaired/Not Repaired): ");
             String status = scanner.nextLine();
 
             Mobile mobile = new HandedMobile(id, name, price, quantity, manufacturer, importedCountry, status);
@@ -54,9 +54,9 @@ public class MobileManager {
 
     public void displayMobiles() {
         if (mobiles.isEmpty()) {
-            System.out.println("Danh sách điện thoại trống.");
+            System.out.println("The list of mobiles is empty.");
         } else {
-            System.out.println("Danh sách điện thoại:");
+            System.out.println("List of mobiles:");
             for (Mobile mobile : mobiles) {
                 System.out.println(mobile.toString());
             }
@@ -70,7 +70,7 @@ public class MobileManager {
                 System.out.println("Enter ID to delete: ");
                 int id = Integer.parseInt(scanner.nextLine());
 
-                // Tìm kiếm điện thoại theo ID
+                // Search for the mobile by ID
                 Mobile toDelete = null;
                 for (Mobile mobile : mobiles) {
                     if (mobile.getId() == id) {
@@ -79,49 +79,49 @@ public class MobileManager {
                     }
                 }
 
-                // Nếu không tìm thấy, ném Exception
+                // Throw exception if not found
                 if (toDelete == null) {
-                    throw new NotFoundProductException("ID điện thoại không tồn tại.");
+                    throw new NotFoundException("Mobile ID not found.");
                 }
 
-                // Yêu cầu xác nhận từ người dùng
-                System.out.println("Bạn có chắc chắn muốn xóa điện thoại này không? (Yes/No): ");
+                // Confirm deletion from user
+                System.out.println("Are you sure you want to delete this mobile? (Yes/No): ");
                 String confirmation = scanner.nextLine();
 
                 if (confirmation.equalsIgnoreCase("Yes")) {
-                    // Thực hiện xóa
+                    // Perform deletion
                     mobiles.remove(toDelete);
                     CSVHandler.overwriteMobiles(mobiles);
 
-                    // Hiển thị danh sách sau khi xóa
+                    // Display the list after deletion
                     System.out.println("Mobile deleted successfully!");
                     displayMobiles();
                 } else {
-                    System.out.println("Operation canceled. Returning to main menu.");
+                    System.out.println("Operation canceled. Returning to the main menu.");
                 }
-                break; // Thoát vòng lặp sau khi xử lý xong
+                break; // Exit the loop after processing
 
-            } catch (NotFoundProductException e) {
+            } catch (NotFoundException e) {
                 System.out.println(e.getMessage());
-                System.out.println("Nhấn Enter để quay lại menu chính.");
+                System.out.println("Press Enter to return to the main menu.");
                 scanner.nextLine();
-                break; // Quay lại menu chính
+                break; // Return to the main menu
             } catch (NumberFormatException e) {
-                System.out.println("Vui lòng nhập một số nguyên hợp lệ cho ID.");
+                System.out.println("Please enter a valid integer ID.");
             }
         }
     }
 
     public void searchMobile() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập từ khóa để tìm kiếm (ID hoặc Tên): ");
-        String keyword = scanner.nextLine().toLowerCase(); // Chuyển từ khóa về chữ thường
+        System.out.println("Enter a keyword to search (ID or Name): ");
+        String keyword = scanner.nextLine().toLowerCase(); // Convert the keyword to lowercase
 
         boolean found = false;
-        System.out.println("Kết quả tìm kiếm:");
+        System.out.println("Search results:");
 
         for (Mobile mobile : mobiles) {
-            // Tìm kiếm gần đúng theo ID hoặc Tên
+            // Perform approximate search by ID or Name
             if (String.valueOf(mobile.getId()).contains(keyword) || mobile.getName().toLowerCase().contains(keyword)) {
                 System.out.println(mobile.toString());
                 found = true;
@@ -129,7 +129,7 @@ public class MobileManager {
         }
 
         if (!found) {
-            System.out.println("Không tìm thấy điện thoại phù hợp với từ khóa: " + keyword);
+            System.out.println("No mobiles found matching the keyword: " + keyword);
         }
     }
 }
